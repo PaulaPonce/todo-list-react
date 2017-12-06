@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './Foot.css';
+import '../components/Foot.css';
 import {Footer} from 'react-materialize';
 
 class Foot extends Component {
   render() {
-    return (
-      <div className="App">
-        <Footer copyrights="&copy 2015 Copyright Text"
-          moreLinks={
-            <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
-          }
+    return ( 
+      <Footer className="Footer" copyrights="&copy 2015 Copyright Text"
+        moreLinks={
+          <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+        }
+          /*
           links={
             <ul>
               <li><a className="grey-text text-lighten-3" href="#!">Link 1</a></li>
@@ -19,11 +19,10 @@ class Foot extends Component {
             </ul>
           }
           className='example Footer'
-          >
-          <h5 className="white-text">Footer Content</h5>
-          <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-        </Footer>; 
-      </div>
+          */
+        >
+        <h5 className="white-text">Footer Content</h5>
+      </Footer> 
     );
   }
 }
