@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import '../components/MainSection.css';
+import ToDoTextInput from '../components/ToDoTextInput'
 
-class MainSection extends Component {
-  render() {
-    return (
-      <div className="App">
-        <p className="App-intro">
-          
-        </p>  
-      </div>
-    );
-  }
+class MainSection extends React.Component {	
+	render() {
+		return (
+			<div className="App">
+				<ToDoTextInput/>
+			</div>
+		);
+	}
 }
 
 export default MainSection;
