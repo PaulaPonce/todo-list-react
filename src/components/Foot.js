@@ -3,11 +3,24 @@ import '../components/Foot.css';
 import {Footer} from 'react-materialize';
 
 class Foot extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			content: 'Footer Content'
+		}
+	}
+
 	render() {
+		const { content} = this.state
+		
 		return ( 
 			<Footer className="Footer" copyrights="&copy 2015 Copyright Text"
 				moreLinks={
-					<a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+					<a className="grey-text text-lighten-4 right" href="https://github.com/PaulaPonce" target="_blank">
+						<i class="fa fa-github" aria-hidden="true"></i>
+					</a>
 				}
 				/*
 				links={
@@ -21,7 +34,7 @@ class Foot extends React.Component {
 				className='example Footer'
 				*/
 			>
-				<h5 className="white-text">Footer Content</h5>
+				<h5 className="white-text">{content}</h5>
 			</Footer> 
 		);
 	}

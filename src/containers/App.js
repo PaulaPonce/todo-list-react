@@ -4,8 +4,7 @@ import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import Foot from '../components/Foot';
 
-
-class App extends Component {
+class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
@@ -13,7 +12,7 @@ class App extends Component {
 				<MainSection/>
 				<Foot/>
 			</div>
-		);
+		)
 	}
 }
 

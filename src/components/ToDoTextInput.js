@@ -69,9 +69,10 @@ class ToDoTextInput extends React.Component {
 				{/*listen the submit event on the form, and call addItem method*/}
 				<form onSubmit={this.addItem}>
 					{/*acces DOM elements via refs, storing a reference on input element*/}
-					<input  label="Add a task!" validate type='text' ref={(a) => this._inputElement = a}></input>
-					<button waves='light' type="submit">ADD</button>
+					<label><i class="material-icons">assignment</i></label>
+					<input s={12} className="Header-input" placeholder="Add a task!" validate type='text' ref={(a) => this._inputElement = a}></input>
 				</form>
+				<Button s={12} waves='light' type="submit">ADD<Icon left>add</Icon></Button>
 				<ToDoItem
 					entries={this.state.items}
 					delete={this.deleteItem}
