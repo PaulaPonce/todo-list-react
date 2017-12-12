@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import '../components/Foot.css';
 import {Footer} from 'react-materialize';
+import PropTypes from 'prop-types';
 
 class Foot extends React.Component {
-
+	/*
 	constructor(props) {
 		super(props);
 
@@ -11,9 +12,10 @@ class Foot extends React.Component {
 			content: 'Footer Content'
 		}
 	}
+	*/
 
 	render() {
-		const { content} = this.state
+		//const { content } = this.state
 		
 		return ( 
 			<Footer className="Footer" copyrights="&copy 2015 Copyright Text"
@@ -34,10 +36,18 @@ class Foot extends React.Component {
 				className='example Footer'
 				*/
 			>
-				<h5 className="white-text">{content}</h5>
+				<h5 className="white-text">{this.props.contenido}</h5>
 			</Footer> 
 		);
 	}
+}
+
+Foot.PropTypes = {
+	contenido: PropTypes.string.isRequired
+}
+
+Foot.defaultProps = {
+	 contenido: 'Footer content'
 }
 
 export default Foot;
