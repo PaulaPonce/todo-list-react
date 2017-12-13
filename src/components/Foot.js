@@ -46,8 +46,4 @@ Foot.PropTypes = {
 	contenido: PropTypes.string.isRequired
 }
 
-Foot.defaultProps = {
-	 contenido: 'Footer content'
-}
-
 export default Foot;

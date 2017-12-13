@@ -8,9 +8,9 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
-				<Header/>
+				<Header titulo='soy el titulo' />
 				<MainSection/>
-				<Foot/>
+				<Foot contenido='Footer content' />
 			</div>
 		)
 	}

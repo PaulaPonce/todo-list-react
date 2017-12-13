@@ -32,8 +32,4 @@ Header.PropTypes = {
 	descripcion: PropTypes.string
 }
 
-Header.defaultProps = {
-	 titulo: 'soy el titulo'
-}
-
 export default Header;
