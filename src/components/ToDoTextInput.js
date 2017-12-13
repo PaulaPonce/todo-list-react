@@ -29,7 +29,8 @@ class ToDoTextInput extends React.Component {
 			itemArray.unshift(
 				{
 					text: this._inputElement.value,
-					key:Date.now()
+					key: Date.now(),
+					completed: false
 				}
 			);
 
@@ -62,6 +63,9 @@ class ToDoTextInput extends React.Component {
 <input  label="Add a task!" validate type='text' ref={(a) => this._inputElement = a}></input>
 <button waves='light' type="submit">ADD</button>
 */
+handleClick(event) {
+	console.log(event);
+}
 
 	render() {
 		return (
@@ -72,7 +76,7 @@ class ToDoTextInput extends React.Component {
 					<label><i class="material-icons">assignment</i></label>
 					<input s={12} className="Header-input" placeholder="Add a task!" validate type='text' ref={(a) => this._inputElement = a}></input>
 				</form>
-				<Button s={12} waves='light' type="submit">ADD<Icon left>add</Icon></Button>
+				<Button s={12} waves='light' type="submit" onClick={this.handleClick}>ADD<Icon left>add</Icon></Button>
 				<ToDoItem
 					entries={this.state.items}
 					delete={this.deleteItem}
