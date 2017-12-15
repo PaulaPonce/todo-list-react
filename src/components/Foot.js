@@ -1,49 +1,82 @@
 import React, { Component } from 'react';
-import '../components/Foot.css';
-import {Footer} from 'react-materialize';
 import PropTypes from 'prop-types';
+import classnames from 'classnames'
+import {Footer} from 'react-materialize';
+import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/Filters';
+import '../components/Foot.css';
+
+const FILTER_FOOTER = {
+	[SHOW_ALL]: 'All',
+	[SHOW_ACTIVE]: 'Active',
+	[SHOW_COMPLETED]: 'Completed'
+}
 
 class Foot extends React.Component {
-	/*
-	constructor(props) {
-		super(props);
 
-		this.state = {
-			content: 'Footer Content'
+	static propTypes = {
+		completedCount: PropTypes.number.isRequired,
+		activeCount: PropTypes.number.isRequired,
+		filter: PropTypes.string.isRequired,
+		onClearCompleted: PropTypes.func.isRequired,
+		onShow: PropTypes.func.isRequired
+	}
+
+	renderTodoCount() {
+		const { activeCount } = this.props
+		const itemWord = activeCount === 1 ? 'item' : 'items'
+		return (
+			<span>
+				<strong>{activeCount || 'No'}</strong>{itemWord}
+			</span>
+		)
+	}
+
+	renderFilterLink(filter) {
+		const title = FILTER_FOOTER[filter]
+		const { filter: selectedFilter, onShow} = this.props
+		return (
+			<a 
+				className={classnames({ selected: filter === selectedFilter})}
+				style = {{ cursor: 'pointer'}}
+				onClick={() => onShow(filter)}
+			>
+				{title}
+			</a>
+		)
+	}
+
+	renderClearButton() {
+		const { completedCount, onClearCompleted } = this.props
+		if (completedCount > 0) {
+			return (
+				<button
+					onClick= {onClearCompleted} >Clear completed 
+				</button>
+			)
 		}
 	}
-	*/
 
 	render() {
-		//const { content } = this.state
-		
 		return ( 
-			<Footer className="Footer" copyrights="&copy 2015 Copyright Text"
+			<Footer className="Footer" copyrights="&copy 2017 Copyright Text"
 				moreLinks={
 					<a className="grey-text text-lighten-4 right" href="https://github.com/PaulaPonce" target="_blank">
 						<i class="fa fa-github" aria-hidden="true"></i>
 					</a>
 				}
-				/*
-				links={
-					<ul>
-						<li><a className="grey-text text-lighten-3" href="#!">Link 1</a></li>
-						<li><a className="grey-text text-lighten-3" href="#!">Link 2</a></li>
-						<li><a className="grey-text text-lighten-3" href="#!">Link 3</a></li>
-						<li><a className="grey-text text-lighten-3" href="#!">Link 4</a></li>
-					</ul>
-				}
-				className='example Footer'
-				*/
 			>
-				<h5 className="white-text">{this.props.contenido}</h5>
+				{this.renderTodoCount()}
+				<ul>
+					{[ SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED].map(filter =>
+						<li key={filter}>
+							{this.renderFilterLink(filter)}
+						</li>
+					)}
+				</ul>
+				{this.renderClearButton()}
 			</Footer> 
-		);
+		)
 	}
-}
-
-Foot.PropTypes = {
-	contenido: PropTypes.string.isRequired
 }
 
 export default Foot;

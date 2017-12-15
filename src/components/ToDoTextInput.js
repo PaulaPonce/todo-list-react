@@ -1,87 +1,69 @@
 import React, { Component } from 'react';
-import '../components/ToDoTextInput.css';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import {Row, Input, Icon, Button} from 'react-materialize';
-import ToDoItem from '../components/ToDoItem'
+import ToDoItem from '../components/ToDoItem';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addTodo } from '../actions';
+import '../components/ToDoTextInput.css';
 
 class ToDoTextInput extends React.Component {
-	
-	constructor(props, context) {
-		super(props, context);
-
-		//state object
-		this.state = {
-			//items array to storing all the items
-			items: []
-		};
-
-		//addItem event
-		this.addItem = this.addItem.bind(this);
-		//deleteItem event
-		this.deleteItem = this.deleteItem.bind(this);
+	static propTypes = {
+		onSave: PropTypes.func.isRequired,
+		text: PropTypes.string,
+		placeholder: PropTypes.string,
+		editing: PropTypes.bool,
+		newTodo: PropTypes.bool
 	}
 
-	addItem(e) {
-		//variable to store the current value of items state object
-		let itemArray = this.state.items;
+	state = {
+		text: this.props.text || ''
+	}
 
-		//validate if input has content --> add the text to itemArray
-		if(this._inputElement.value !== "") {
-			itemArray.unshift(
-				{
-					text: this._inputElement.value,
-					key: Date.now(),
-					completed: false
-				}
-			);
-
-			this.setState({
-				items: itemArray
-			});
-
-			this._inputElement.value = "";
+	handleSubmit = e => {
+		const text = e.target.value.trim()
+		if (e.wich === 13) {
+			this.props.onSave(text)
+			if (this.props.newTodo) {
+				this.setState({ text: ''})
+			}
 		}
-		console.log(itemArray);
-		e.preventDefault();
 	}
 
-	deleteItem(key) {
-		//contains everything except the item to removing
-		let filteredItems = this.state.items.filter(function (item) {
-			return (item.key !== key);
-		});
-		this.setState({
-			items: filteredItems
-		});
+	handleChange = e => {
+		 this.setState({ text: e.target.value })
 	}
 
-/*
-<Row>
-<Input s={12} className="Header-input" label="Add a task!" validate type='text' ref={(a) => this._inputElement = a}><Icon>assignment</Icon></Input>
-<Button s={12} waves='light' type="submit">ADD<Icon left>add</Icon></Button>
-</Row>
-
-<input  label="Add a task!" validate type='text' ref={(a) => this._inputElement = a}></input>
-<button waves='light' type="submit">ADD</button>
-*/
-handleClick(event) {
-	console.log(event);
-}
+	handleBlur = e => {
+		if( !this.props.newtodo) {
+			this.props.onSave(e.target.value)
+		}
+	}
 
 	render() {
 		return (
-			<div>
+			<Row>
 				{/*listen the submit event on the form, and call addItem method*/}
-				<form onSubmit={this.addItem}>
+				<form>
 					{/*acces DOM elements via refs, storing a reference on input element*/}
 					<label><i class="material-icons">assignment</i></label>
-					<input s={12} className="Header-input" placeholder="Add a task!" validate type='text' ref={(a) => this._inputElement = a}></input>
-				</form>
-				<Button s={12} waves='light' type="submit" onClick={this.handleClick}>ADD<Icon left>add</Icon></Button>
-				<ToDoItem
-					entries={this.state.items}
-					delete={this.deleteItem}
-				/>
-			</div>	
+					<input s={12} 
+						className = {classnames({
+							edit: this.props.editing,
+							'new-todo': this.props.newTodo
+						})}
+						type="text"
+						placeholder={this.props.placeholder}
+						autoFocus="true"
+						value={this.state.text}
+						onBlur={this.handleBlur}
+						onChange={this.handleChange}
+						onKeyDown={this.handleSubmit}
+					/>
+					<Button s={12} waves='light' type="submit">ADD<Icon left>add</Icon></Button>
+				</form>	
+			</Row>	
 		)
 	}
 }

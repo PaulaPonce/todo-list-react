@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
-import '../containers/App.css';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
 import Foot from '../components/Foot';
+import * as TodoActions from '../actions';
+import '../containers/App.css';
 
-class App extends React.Component {
-	render() {
-		return (
-			<div className="App">
-				<Header titulo='soy el titulo' />
-				<MainSection/>
-				<Foot contenido='Footer content' />
-			</div>
-		)
-	}
+const App = ({todos, actions}) => (
+	<div className="App">
+		<Header title='To Do List React' addTodo={actions.addTodo} />
+		<MainSection todos={todos} actions={actions}/>	
+	</div>
+)
+
+App.propTypes = {
+	todos: PropTypes.array.isRequired,
+	actions: PropTypes.object.isRequired
 }
 
-export default App;
+const mapStateToProps = state => ({
+	todos: state.todos
+})
+
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(TodoActions, dispatch)
+})
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(App);

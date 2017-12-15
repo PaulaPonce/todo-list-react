@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames'
 import '../components/ToDoItem.css';
+import ToDoTextInput from '../components/ToDoTextInput';
+import {Button} from 'react-materialize';
 
 class ToDoItem extends React.Component {
 	// MONTADO
 	// se instancia un componente, define el estado inicial
+	/*
 	constructor(props, context) {
 		super(props, context);
 
 		this.createTask = this.createTask.bind(this);
-		this.delete = this.delete.bind(this);
+		this.deleteTodo = this.deleteTodo.bind(this);
 	}
+	*/
 	// el componente se está por renderizar, modificar su estado sin causar una actualización
 	componentWillMount() {
 		console.log('el componente se va a montar :B')
@@ -54,26 +60,67 @@ class ToDoItem extends React.Component {
 	}
 	*/
 
-	delete(key) {
-		this.props.delete(key);
+	static propTypes = {
+		todo: PropTypes.object.isRequired,
+		editTodo: PropTypes.func.isRequired,
+		deleteTodo: PropTypes.func.isRequired,
+		editTodo: PropTypes.func.isRequired
 	}
 
-	createTask(item) {
-		//listen the click event and associating it with an event handler delete
-		return <li onClick={(e) => this.delete(item.key, e)} key={item.key}>{item.text}</li>
+	state = {
+		editing: false
+	}
 
+	handleDoubleClick = () => {
+		this.setState({ editing: true })
+	}
+
+	handleSave = (key, text) => {
+		if (text.length === 0) {
+			this.props.deleteTodo(key)
+		} else {
+			this.props.editTodo(key, text)
+		}
+		this.setState({ editing: false })
 	}
 
 	render() {
-		{/*list of to do items passed as entries and turning them into jsx/html elements*/};
-		let todoEntries = this.props.entries;
-		let listItems = todoEntries.map(this.createTask);
+		const { todo, completeTodo, deleteTodo } = this.props
+		let element
+
+		if (this.state.editing) {
+			element = (
+				<ToDoTextInput 
+					text= {todo.text}
+					editing={this.state.editing}
+					onSave={(text) => this.handleSave(todo.key, text)} 
+				/>
+			)
+		} else {
+			element = (
+				<div>
+					<input 
+						className="toggle"
+						type="checkbox"
+						checked={todo.completed}
+						onChange={() => completeTodo(todo.key)} 
+					/>
+					<label onDoubleClick={this.handleDoubleClick}>{todo.text}</label>
+					<Button s={12} waves='light' onClick={()=> deleteTodo(todo.key)}>X</Button>
+				</div>
+			)
+		}
+
 		return (
-			<ul>
-				{listItems}
-			</ul>
+			<li className={classnames({
+				completed: todo.completed,
+				editing: this.state.editing
+				})}>
+				{element}
+			</li>
 		);
 	}
 }
 
 export default ToDoItem;
+

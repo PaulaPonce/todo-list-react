@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
-import '../components/Header.css';
 import PropTypes from 'prop-types';
+import ToDoTextInput from '../components/ToDoTextInput';
+import '../components/Header.css';
 
 class Header extends React.Component {
-	/*
-	constructor(props) {
-		super(props);
+	static propTypes = {
+		addTodo: PropTypes.func.isRequired,
+		title: PropTypes.string.isRequired,
+		description: PropTypes.string
+	}
 
-		this.state = {
-		titulo: 'To Do List React', 
-		descripcion: 'soy la descripcion'
-		};
-	}	
-	*/
-	
+	//ToDoTextInput
+	handleSave = text => {
+		if(text.length !== 0) {
+			this.props.addTodo(text)
+		}
+	}
 
 	render() {
-		//const { titulo, descripcion } = this.state
-
 		return (
 			<header className="App-header">
-			<h1 className="App-title">{this.props.titulo}</h1>
-			{this.props.descripcion && <p>{this.props.descripcion}</p>}
+				<h1 className="App-title">
+					{this.props.title}
+				</h1>
+				{this.props.description && <p>{this.props.description}</p>}
+				<ToDoTextInput 
+					newTodo
+					onSave={this.handleSave}
+					placeholder="add a task!"
+				/>
 			</header>
 		);
 	}
-}
-
-Header.PropTypes = {
-	titulo: PropTypes.string.isRequired,
-	descripcion: PropTypes.string
 }
 
 export default Header;
