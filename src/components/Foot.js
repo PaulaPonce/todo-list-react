@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames'
-import {Footer} from 'react-materialize';
+import {Footer, Button} from 'react-materialize';
 import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/Filters';
-import '../components/Foot.css';
+import './Foot.css';
 
 const FILTER_FOOTER = {
 	[SHOW_ALL]: 'All',
@@ -12,7 +12,6 @@ const FILTER_FOOTER = {
 }
 
 class Foot extends React.Component {
-
 	static propTypes = {
 		completedCount: PropTypes.number.isRequired,
 		activeCount: PropTypes.number.isRequired,
@@ -21,52 +20,58 @@ class Foot extends React.Component {
 		onShow: PropTypes.func.isRequired
 	}
 
+	// active to do count
 	renderTodoCount() {
 		const { activeCount } = this.props
 		const itemWord = activeCount === 1 ? 'item' : 'items'
+		
 		return (
-			<span>
-				<strong>{activeCount || 'No'}</strong>{itemWord}
+			<span className="item-count">
+				<strong>{activeCount || 'No'}</strong> {itemWord} left
 			</span>
 		)
 	}
 
+	// filters
 	renderFilterLink(filter) {
-		const title = FILTER_FOOTER[filter]
+		const nameFilter = FILTER_FOOTER[filter]
 		const { filter: selectedFilter, onShow} = this.props
 		return (
 			<a 
+				// filters
 				className={classnames({ selected: filter === selectedFilter})}
-				style = {{ cursor: 'pointer'}}
 				onClick={() => onShow(filter)}
 			>
-				{title}
+				{nameFilter}
 			</a>
 		)
 	}
-
+	
+	// clear button
 	renderClearButton() {
 		const { completedCount, onClearCompleted } = this.props
 		if (completedCount > 0) {
 			return (
-				<button
+				<Button s={12} 
+					waves='light'
 					onClick= {onClearCompleted} >Clear completed 
-				</button>
+				</Button>
 			)
 		}
 	}
 
 	render() {
 		return ( 
-			<Footer className="Footer" copyrights="&copy 2017 Copyright Text"
+			<Footer className="Footer" copyrights="developed by Paula Ponce"
 				moreLinks={
-					<a className="grey-text text-lighten-4 right" href="https://github.com/PaulaPonce" target="_blank">
-						<i class="fa fa-github" aria-hidden="true"></i>
+					<a className="grey-text text-lighten-4 right footer-below" href="https://github.com/PaulaPonce" target="_blank">
+						<i className="fa fa-github" aria-hidden="true"></i>
 					</a>
 				}
 			>
 				{this.renderTodoCount()}
-				<ul>
+				{/*Filters*/}
+				<ul className="footer-above">
 					{[ SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED].map(filter =>
 						<li key={filter}>
 							{this.renderFilterLink(filter)}

@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {Row, Input, Icon, Button} from 'react-materialize';
-import ToDoItem from '../components/ToDoItem';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { addTodo } from '../actions';
-import '../components/ToDoTextInput.css';
+import {Row, Icon, Button} from 'react-materialize';
+import './ToDoTextInput.css';
 
 class ToDoTextInput extends React.Component {
 	static propTypes = {
@@ -21,8 +17,9 @@ class ToDoTextInput extends React.Component {
 		text: this.props.text || ''
 	}
 
+	// add new to do
 	handleSubmit = e => {
-		const text = e.target.value.trim()
+		const text = e.target.value //e.target.value.trim()
 		if (e.wich === 13) {
 			this.props.onSave(text)
 			if (this.props.newTodo) {
@@ -44,11 +41,11 @@ class ToDoTextInput extends React.Component {
 	render() {
 		return (
 			<Row>
-				{/*listen the submit event on the form, and call addItem method*/}
-				<form>
-					{/*acces DOM elements via refs, storing a reference on input element*/}
-					<label><i class="material-icons">assignment</i></label>
-					<input s={12} 
+				<form className="Header-form">
+					{/*Icon*/}
+					<label><i className="material-icons">assignment</i></label>
+					{/*Input*/}
+					<input s={10} 
 						className = {classnames({
 							edit: this.props.editing,
 							'new-todo': this.props.newTodo
@@ -60,9 +57,16 @@ class ToDoTextInput extends React.Component {
 						onBlur={this.handleBlur}
 						onChange={this.handleChange}
 						onKeyDown={this.handleSubmit}
-					/>
-					<Button s={12} waves='light' type="submit">ADD<Icon left>add</Icon></Button>
-				</form>	
+					/>	
+				</form>
+				{/*Add button*/}
+				<Button s={12} 
+					waves='light' 
+					onClick={this.handleSubmit}
+				>
+					ADD
+					<Icon left>add</Icon>
+				</Button>
 			</Row>	
 		)
 	}

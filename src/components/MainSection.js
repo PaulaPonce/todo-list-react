@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import ToDoTextInput from '../components/ToDoTextInput';
-import ToDoItem from '../components/ToDoItem';
-import Foot from '../components/Foot'
+import ToDoItem from './ToDoItem';
+import Foot from './Foot';
+import {Collection} from 'react-materialize';
 import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/Filters';
-import '../components/MainSection.css';
+import './MainSection.css';
 
 const FILTERS = {
 	[SHOW_ALL]: () => true,
@@ -30,7 +29,6 @@ class MainSection extends React.Component {
 		this.setState({ filter })
 	}
 
-	
 	renderToggleAll(completedCount) {
 		const { todos, actions } = this.props
 		if (todos.length > 0) {
@@ -74,13 +72,16 @@ class MainSection extends React.Component {
 			0
 		)
 		return (
-			<div className="App">
-				{this.renderToggleAll(completedCount)}
-				<ul>
-					{filteredTodos.map(todo=>
-						<ToDoItem key={todo.key} todo={todo} {...actions} />
-					)}
-				</ul>
+			<div>
+				<section>
+					{this.renderToggleAll(completedCount)}
+					<Collection className="todo-list">
+						{filteredTodos.map(todo => 
+							<ToDoItem key={todo.id} todo={todo} {...actions} />
+						)}
+					</Collection>
+				</section>
+				{/*footer*/}
 				{this.renderFooter(completedCount)}
 			</div>
 		)

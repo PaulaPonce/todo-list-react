@@ -1,0 +1,41 @@
+/*todo item container*/
+.collection-item {
+	height: 54px;
+}
+
+.collection-item:hover {
+	background-color: #ee6e7329 !important;
+}
+
+.collection-item .todo-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+/*todo item*/
+.collection-item .todo-container .todo-item {
+	color: #444;
+}
+
+/*todo delete button*/
+.collection-item .todo-container .delete-btn {
+	display: none;
+}
+
+.collection-item:hover .todo-container .delete-btn {
+	display: block !important;
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	border-radius: 50%;
+	border: 1px solid #26a69a;
+	background-color: #b1dcfb6e;
+}
+
+.collection-item .todo-container .delete-btn i {
+	color: #26a69a;
+}
+
+.collection-item.completed {
+	text-decoration: line-through;
+}

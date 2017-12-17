@@ -4,13 +4,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
-import Foot from '../components/Foot';
-import * as TodoActions from '../actions';
+import * as TodoActions from '../actions'; // <------
 import '../containers/App.css';
 
 const App = ({todos, actions}) => (
 	<div className="App">
-		<Header title='To Do List React' addTodo={actions.addTodo} />
+		<Header title='To Do List React' description='soy la descripción' addTodo={actions.addTodo} />
 		<MainSection todos={todos} actions={actions}/>	
 	</div>
 )
@@ -31,4 +30,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(App);
+)(App)

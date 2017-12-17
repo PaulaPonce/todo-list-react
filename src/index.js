@@ -1,18 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './containers/App';
-import registerServiceWorker from './registerServiceWorker';
-
-import { render } from 'react-dom'
-import { Provider } from 'react-redux';
+import { ReactDOM, render } from 'react-dom';
 import { createStore } from 'redux';
-import reducers from './reducers';
+import { Provider } from 'react-redux';
+import App from './containers/App';
+import reducer from './reducers'; // <------
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
 
 // creates a store using Redux createStore function
-let store = createStore(reducers);
+const store = createStore(reducer);
 
-ReactDOM.render(
+render(
 	<Provider store={store}>
 		<App />
 	</Provider>, 

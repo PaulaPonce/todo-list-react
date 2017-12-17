@@ -1,3 +1,10 @@
-.Header-input {
-	width: 50% !important;
+.Header-form input{
+	width: 70% !important;
+}
+
+.Header-form label {
+	display: inline-block; 
+	width: 20px; 
+	text-align: right;
+	margin: 0 1%;
 }

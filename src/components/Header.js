@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ToDoTextInput from '../components/ToDoTextInput';
-import '../components/Header.css';
+import ToDoTextInput from './ToDoTextInput';
+import './Header.css';
 
 class Header extends React.Component {
 	static propTypes = {
@@ -20,10 +20,15 @@ class Header extends React.Component {
 	render() {
 		return (
 			<header className="App-header">
-				<h1 className="App-title">
-					{this.props.title}
-				</h1>
-				{this.props.description && <p>{this.props.description}</p>}
+				<div className="Title-container">
+					{/*Title*/}
+					<h1 className="Header-title">
+						{this.props.title}
+					</h1>
+					{/*Description*/}
+					{this.props.description && <h2 className="Header-description">{this.props.description}</h2>}
+				</div>
+				{/*Input form*/}
 				<ToDoTextInput 
 					newTodo
 					onSave={this.handleSave}

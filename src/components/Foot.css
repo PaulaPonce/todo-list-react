@@ -1,7 +1,45 @@
-.App {
-  text-align: center;
+.Footer {
+	margin-top: 5%;
 }
 
-.Footer {
-	margin-top: 20%;
+/****Footer above****/
+
+/*center content*/
+.container .row .col {
+	float: inherit;
+}
+.page-footer .container .row div {
+	margin: 0 auto;
+}
+
+/*to do count*/
+.item-count {
+	font-size: 16px;
+}
+
+strong {
+	font-weight: bold;
+}
+
+/*filters*/
+.footer-above li{
+	display: inline-block;
+	padding: 0 20px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.footer-above li a {
+	color: #444;
+}
+
+/*selected filter*/
+.selected {
+	text-decoration: underline;
+}
+
+/****Footer below****/
+
+.footer-below .fa{
+	font-size: 24px;
 }
