@@ -58,7 +58,7 @@ handleChange = (id) => {
 						className="toggle"
 						type="checkbox"
 						checked={todo.completed}
-						onChange={() => completeTodo(todo.id)} 
+						onChange={(id) => completeTodo(todo.id)} 
 					/>
 					<label 
 						className="todo-item"
