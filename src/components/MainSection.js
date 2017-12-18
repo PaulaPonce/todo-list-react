@@ -6,6 +6,7 @@ import {Collection} from 'react-materialize';
 import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/Filters';
 import './MainSection.css';
 
+// footer filters
 const FILTERS = {
 	[SHOW_ALL]: () => true,
 	[SHOW_ACTIVE]: todo => !todo.completed,
@@ -21,14 +22,17 @@ class MainSection extends React.Component {
 	// filter render in Footer
 	state = { filter: SHOW_ALL}
 
+	// clear completed event
 	handleClearCompleted = () => {
 		this.props.actions.clearCompleted()
 	}
 
+	// show event
 	handleShow = filter => {
 		this.setState({ filter })
 	}
 
+	// complete all todo items
 	renderToggleAll(completedCount) {
 		const { todos, actions } = this.props
 		if (todos.length > 0) {
@@ -45,6 +49,7 @@ class MainSection extends React.Component {
 		}
 	}
 
+	// render Footer Component
 	renderFooter(completedCount) {
 		const { todos} = this.props
 		const { filter } = this.state
@@ -74,6 +79,7 @@ class MainSection extends React.Component {
 		return (
 			<div>
 				<section>
+					{/*todo items*/}
 					{this.renderToggleAll(completedCount)}
 					<Collection className="todo-list">
 						{filteredTodos.map(todo => 

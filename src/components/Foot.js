@@ -20,7 +20,7 @@ class Foot extends React.Component {
 		onShow: PropTypes.func.isRequired
 	}
 
-	// active to do count
+	// item count
 	renderTodoCount() {
 		const { activeCount } = this.props
 		const itemWord = activeCount === 1 ? 'item' : 'items'
@@ -54,7 +54,9 @@ class Foot extends React.Component {
 			return (
 				<Button s={12} 
 					waves='light'
-					onClick= {onClearCompleted} >Clear completed 
+					onClick= {onClearCompleted} 
+				>
+					Clear completed 
 				</Button>
 			)
 		}
@@ -62,13 +64,14 @@ class Foot extends React.Component {
 
 	render() {
 		return ( 
-			<Footer className="Footer" copyrights="developed by Paula Ponce"
+			<Footer className="Footer"
 				moreLinks={
-					<a className="grey-text text-lighten-4 right footer-below" href="https://github.com/PaulaPonce" target="_blank">
+					<a className="grey-text text-lighten-4 right footer-link" href="https://github.com/PaulaPonce" target="_blank">
 						<i className="fa fa-github" aria-hidden="true"></i>
 					</a>
 				}
 			>
+				{/*Item Counter*/}
 				{this.renderTodoCount()}
 				{/*Filters*/}
 				<ul className="footer-above">
@@ -78,6 +81,7 @@ class Foot extends React.Component {
 						</li>
 					)}
 				</ul>
+				{/*Clear Button*/}
 				{this.renderClearButton()}
 			</Footer> 
 		)

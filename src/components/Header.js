@@ -10,7 +10,7 @@ class Header extends React.Component {
 		description: PropTypes.string
 	}
 
-	//ToDoTextInput
+	// save todo item event in ToDoTextInput
 	handleSave = text => {
 		if(text.length !== 0) {
 			this.props.addTodo(text)
@@ -32,7 +32,7 @@ class Header extends React.Component {
 				<ToDoTextInput 
 					newTodo
 					onSave={this.handleSave}
-					placeholder="add a task!"
+					placeholder="add a new task"
 				/>
 			</header>
 		);

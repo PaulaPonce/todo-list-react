@@ -9,7 +9,7 @@ import '../containers/App.css';
 
 const App = ({todos, actions}) => (
 	<div className="App">
-		<Header title='To Do List React' description='soy la descripción' addTodo={actions.addTodo} />
+		<Header title='To Do List React' addTodo={actions.addTodo} />
 		<MainSection todos={todos} actions={actions}/>	
 	</div>
 )

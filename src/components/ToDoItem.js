@@ -22,7 +22,7 @@ class ToDoItem extends React.Component {
 		this.setState({ editing: true })
 	}
 
-	// save edit todo event
+	// save edited todo event
 	handleSave = (id, text) => {
 		if (text.length === 0) {
 			this.props.deleteTodo(id)
@@ -38,10 +38,12 @@ handleChange = (id) => {
 	this.props.completeTodo(id)
 }
 */
+
 	render() {
 		const { todo, completeTodo, deleteTodo } = this.props
 		let element
 
+		// edit todo item
 		if (this.state.editing) {
 			element = (
 				<ToDoTextInput 
@@ -70,6 +72,7 @@ handleChange = (id) => {
 			)
 		}
 
+		//Todo Items
 		return (
 			<CollectionItem className={classnames({
 				completed: todo.completed,
